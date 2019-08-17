@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
       }
       printf("\n");
     }
-    rotate_face(face);
+    rotate_face(face, 1);
   }
 
   return 0;
