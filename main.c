@@ -25,5 +25,7 @@ int main(int argc, char *argv[]) {
   print_cube_from_map(puzzle, map_1, 1);
   turn_front(&puzzle, 1);
   print_cube_from_map(puzzle, map_1, 2);
+  turn_back(&puzzle, 0);
+  print_cube_from_map(puzzle, map_1, 1);
   return 0;
 }
