@@ -58,18 +58,24 @@ char get_char(short cell) {
   }
 }
 
-void print_cube_from_map(cube puzzle, const short map[3][4], short zoom) {
+void print_cube_from_map(cube puzzle, const short map[3][4], short zoom, short spacing) {
   for(int r = 0; r < 3; r++) {
     for(int s = 0; s < SIZE; s++) {
       for(int z = 0; z < zoom; z++) {
 	for(int c = 0; c < 4; c++) {
 	  for(int s2 = 0; s2 < SIZE; s2++) {
-	    char color = get_char(get_cell(puzzle, s, s2, map[r][c]));
+	    char color = get_char(get_cell(puzzle, s, s2, map[r][c]));	  
+	    for(int sp = 0; sp < spacing; sp++) {
+	      printf(" ");
+	    }
 	    for(int z2 = 0; z2 < zoom; z2++) {
 	      printf("%c", color);
 	    }
 	  }
 	}
+	printf("\n");
+      }
+      for(int sp = 0; sp < spacing; sp++) {
 	printf("\n");
       }
     }

@@ -22,10 +22,10 @@ void init_cube(cube* puzzle) {
 int main(int argc, char *argv[]) {
   cube puzzle;
   init_cube(&puzzle);
-  print_cube_from_map(puzzle, map_1, 1);
+  print_cube_from_map(puzzle, map_1, 1, 0);
   turn_front(&puzzle, 1);
-  print_cube_from_map(puzzle, map_1, 2);
+  print_cube_from_map(puzzle, map_1, 2, 0);
   turn_back(&puzzle, 0);
-  print_cube_from_map(puzzle, map_1, 1);
+  print_cube_from_map(puzzle, map_1, 2, 1);
   return 0;
 }
