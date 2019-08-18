@@ -19,17 +19,17 @@ void rotate_face(short face[SIZE][SIZE], short clockwise) {
 void turn_front(cube puzzle, short clockwise) {
   rotate_face(puzzle.front, clockwise);
   for(int i = 0; i < SIZE; i++) {
-    short temp = cube.up[SIZE - 1][i];
+    short temp = puzzle.up[SIZE - 1][i];
     if(clockwise) {
-      cube.up[SIZE - 1][i] = cube.left[SIZE - 1 - i][SIZE - 1];
-      cube.left[SIZE - 1 - i][SIZE - 1] = cube.down[0][SIZE - 1 - i];
-      cube.down[0][SIZE - 1 - i] = cube.right[i][0];
-      cube.right[i][0] = temp;
+      puzzle.up[SIZE - 1][i] = puzzle.left[SIZE - 1 - i][SIZE - 1];
+      puzzle.left[SIZE - 1 - i][SIZE - 1] = puzzle.down[0][SIZE - 1 - i];
+      puzzle.down[0][SIZE - 1 - i] = puzzle.right[i][0];
+      puzzle.right[i][0] = temp;
     } else {
-      cube.up[SIZE - 1][i] = cube.right[i][0];
-      cube.right[i][0] = cube.down[0][SIZE - 1 - i];
-      cube.down[0][SIZE - 1 - i] = cube.left[SIZE - 1 - i][SIZE - 1];
-      cube.left[SIZE - 1 - i][SIZE - 1] = temp;
+      puzzle.up[SIZE - 1][i] = puzzle.right[i][0];
+      puzzle.right[i][0] = puzzle.down[0][SIZE - 1 - i];
+      puzzle.down[0][SIZE - 1 - i] = puzzle.left[SIZE - 1 - i][SIZE - 1];
+      puzzle.left[SIZE - 1 - i][SIZE - 1] = temp;
     }
   }
 }

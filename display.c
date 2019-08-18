@@ -25,16 +25,54 @@ short get_cell(cube puzzle, int row, int col, short num) {
 
   switch(face) {
   case 0:
-    return cube.up[t_row][t_col];
+    return puzzle.up[t_row][t_col];
   case 1:
-    return cube.left[t_row][t_col];
+    return puzzle.left[t_row][t_col];
   case 2:
-    return cube.front[t_row][t_col];
+    return puzzle.front[t_row][t_col];
   case 3:
-    return cube.right[t_row][t_col];
+    return puzzle.right[t_row][t_col];
   case 4:
-    return cube.back[t_row][t_col];
+    return puzzle.back[t_row][t_col];
   default:
-    return cube.down[t_row][t_col];
+    return puzzle.down[t_row][t_col];
   }
 }
+
+char get_char(short cell) {
+  switch(cell) {
+  case 1:
+    return 'W';
+  case 2:
+    return 'B';
+  case 3:
+    return 'R';
+  case 4:
+    return 'G';
+  case 5:
+    return 'O';
+  case 6:
+    return 'Y';
+  default:
+    return ' ';
+  }
+}
+
+void print_cube_from_map(cube puzzle, short map[3][4], short zoom) {
+  for(int r = 0; r < 3; r++) {
+    for(int c = 0; c < 4; c++) {
+      for(int s = 0; s < SIZE; s++) {
+	for(int z = 0; z < zoom; z++) {
+	  for(int s2 = 0; s2 < SIZE; s2++) {
+	    char color = get_char(get_cell(puzzle, s, s2, map[r][c]));
+	    for(int z2; z2 < zoom; z2++) {
+	      printf("%c", color);
+	    }
+	  }
+	  printf("\n");
+	}
+      }
+    }
+  }
+}
+	  
