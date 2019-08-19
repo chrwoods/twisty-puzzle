@@ -51,3 +51,21 @@ void turn_back(cube* puzzle, short clockwise) {
     }
   }
 }
+
+void turn_right(cube* puzzle, short clockwise) {
+  rotate_face(puzzle->right, clockwise);
+  for(int i = 0; i < SIZE; i++) {
+    short temp = puzzle->front[SIZE - 1 - i][SIZE - 1];
+    if(clockwise) {
+      puzzle->front[SIZE - 1 - i][SIZE - 1] = puzzle->down[SIZE - 1 - i][SIZE - 1];
+      puzzle->down[SIZE - 1 - i][SIZE - 1] = puzzle->back[i][0];
+      puzzle->back[i][0] = puzzle->up[SIZE - 1 - i][SIZE - 1];
+      puzzle->up[SIZE - 1 - i][SIZE - 1] = temp;
+    } else {
+      puzzle->front[SIZE - 1 - i][SIZE - 1] = puzzle->up[SIZE - 1 - i][SIZE - 1];
+      puzzle->up[SIZE - 1 - i][SIZE - 1] = puzzle->back[i][0];
+      puzzle->back[i][0] = puzzle->down[SIZE - 1 - i][SIZE - 1];
+      puzzle->down[SIZE - 1 - i][SIZE - 1] = temp;
+    }
+  }
+}
