@@ -1,9 +1,9 @@
 #include <curses.h>
 
 #define WHITE_PAIR 1
-#define BLUE_PAIR 2
+#define GREEN_PAIR 2
 #define RED_PAIR 3
-#define GREEN_PAIR 4
+#define BLUE_PAIR 4
 #define ORANGE_PAIR 5
 #define YELLOW_PAIR 6
 
@@ -53,11 +53,11 @@ char get_char(short cell) {
   case 1:
     return 'W';
   case 2:
-    return 'B';
+    return 'G';
   case 3:
     return 'R';
   case 4:
-    return 'G';
+    return 'B';
   case 5:
     return 'O';
   case 6:
@@ -104,7 +104,7 @@ void init_curses() {
   init_pair(RED_PAIR, COLOR_RED, COLOR_BLACK);
   init_pair(GREEN_PAIR, COLOR_GREEN, COLOR_BLACK);
   init_pair(ORANGE_PAIR, COLOR_YELLOW, COLOR_BLACK);
-  init_pair(YELLOW_PAIR, COLOR_MAGENTA, COLOR_BLACK);
+  init_pair(YELLOW_PAIR, COLOR_YELLOW, COLOR_BLACK);
 }
 
 void you_meddling_kids() {
@@ -125,8 +125,14 @@ void update_cube_from_map(cube puzzle, const short map[3][4], short zoom, short 
 	    int color = get_cell(puzzle, s, s2, map[r][c]);
 	    if(color) {
 	      attron(COLOR_PAIR(color));
+	      if(color == WHITE_PAIR || color == YELLOW_PAIR) {
+		attron(A_BOLD);
+	      }
 	      for(int z2 = 0; z2 < zoom; z2++) {
 		mvaddch(row, col++, '#');
+	      }
+	      if(color == WHITE_PAIR || color == YELLOW_PAIR) {
+		attroff(A_BOLD);
 	      }
 	      attroff(COLOR_PAIR(color));
 	    } else {
