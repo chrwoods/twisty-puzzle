@@ -111,13 +111,15 @@ void you_meddling_kids() {
   endwin();
 }
 
-void update_cube_from_map(cube puzzle, const short map[3][4], short zoom, short spacing) {
+void update_cube_from_map(cube puzzle, const short map[3][4], short zoom, short spacing, short face_spacing) {
   short row = 0;
   short col = 0;
   for(int r = 0; r < 3; r++) {
+    row += face_spacing;
     for(int s = 0; s < SIZE; s++) {
       for(int z = 0; z < zoom; z++) {
 	for(int c = 0; c < 4; c++) {
+	  col += face_spacing;
 	  for(int s2 = 0; s2 < SIZE; s2++) {
 	    for(int sp = 0; sp < spacing; sp++) {
 	      mvaddch(row, col++, ' ');

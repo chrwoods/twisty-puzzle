@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     } else if(ch == 'r') {
       turn_right(&puzzle, 1);
     }
-    update_cube_from_map(puzzle, map_1, 2, 0);
+    update_cube_from_map(puzzle, map_1, 2, 0, 1);
     ch = getch();
   }
   you_meddling_kids();
