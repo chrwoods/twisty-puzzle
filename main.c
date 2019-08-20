@@ -22,12 +22,19 @@ void init_cube(cube* puzzle) {
 int main(int argc, char *argv[]) {
   cube puzzle;
   init_cube(&puzzle);
-  print_cube_from_map(puzzle, map_1, 1, 0);
-  turn_front(&puzzle, 1);
-  print_cube_from_map(puzzle, map_1, 2, 0);
-  turn_back(&puzzle, 0);
-  print_cube_from_map(puzzle, map_1, 2, 1);
-  turn_right(&puzzle, 1);
-  print_cube_from_map(puzzle, map_1, 1, 1);
+  init_curses();
+  char ch = getch();
+  while(ch != 'q') {
+    if(ch == 'f') {
+      turn_front(&puzzle, 1);
+    } else if(ch == 'b') {
+      turn_back(&puzzle, 1);
+    } else if(ch == 'r') {
+      turn_right(&puzzle, 1);
+    }
+    update_cube_from_map(puzzle, map_1, 2, 0);
+    ch = getch();
+  }
+  you_meddling_kids();
   return 0;
 }

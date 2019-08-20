@@ -1,3 +1,12 @@
+#include <curses.h>
+
+#define WHITE_PAIR 1
+#define BLUE_PAIR 2
+#define RED_PAIR 3
+#define GREEN_PAIR 4
+#define ORANGE_PAIR 5
+#define YELLOW_PAIR 6
+
 short get_cell(cube puzzle, int row, int col, short num) {
   if(num == 0) return 0;
   if(num < 1 || num > 24) num %= 24;
@@ -82,3 +91,54 @@ void print_cube_from_map(cube puzzle, const short map[3][4], short zoom, short s
   }
 }
 	  
+void init_curses() {
+  initscr();
+  cbreak();
+  noecho();
+  keypad(stdscr, TRUE);
+  curs_set(FALSE);
+  nodelay(stdscr, TRUE);
+  if(has_colors()) start_color();
+  init_pair(WHITE_PAIR, COLOR_WHITE, COLOR_BLACK);
+  init_pair(BLUE_PAIR, COLOR_BLUE, COLOR_BLACK);
+  init_pair(RED_PAIR, COLOR_RED, COLOR_BLACK);
+  init_pair(GREEN_PAIR, COLOR_GREEN, COLOR_BLACK);
+  init_pair(ORANGE_PAIR, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(YELLOW_PAIR, COLOR_MAGENTA, COLOR_BLACK);
+}
+
+void you_meddling_kids() {
+  endwin();
+}
+
+void update_cube_from_map(cube puzzle, const short map[3][4], short zoom, short spacing) {
+  short row = 0;
+  short col = 0;
+  for(int r = 0; r < 3; r++) {
+    for(int s = 0; s < SIZE; s++) {
+      for(int z = 0; z < zoom; z++) {
+	for(int c = 0; c < 4; c++) {
+	  for(int s2 = 0; s2 < SIZE; s2++) {
+	    for(int sp = 0; sp < spacing; sp++) {
+	      mvaddch(row, col++, ' ');
+	    }
+	    int color = get_cell(puzzle, s, s2, map[r][c]);
+	    if(color) {
+	      attron(COLOR_PAIR(color));
+	      for(int z2 = 0; z2 < zoom; z2++) {
+		mvaddch(row, col++, '#');
+	      }
+	      attroff(COLOR_PAIR(color));
+	    } else {
+	      col += zoom;
+	    }
+	  }
+	}
+	row++;
+	col = 0;
+      }
+      row += spacing;
+    }
+  }
+  refresh();
+}
