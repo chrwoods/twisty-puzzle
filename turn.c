@@ -1,3 +1,7 @@
+short not(short num) {
+  return num ? 0 : 1;
+}
+
 void rotate_face(short face[SIZE][SIZE], short clockwise) {
   short rotated[SIZE][SIZE];
   for(int i = 0; i < SIZE; i++) {
@@ -120,6 +124,27 @@ void turn_down(cube* puzzle, short clockwise) {
       puzzle->right[SIZE - 1][i] = puzzle->back[SIZE - 1][i];
       puzzle->back[SIZE - 1][i] = puzzle->left[SIZE - 1][i];
       puzzle->left[SIZE - 1][i] = temp;
+    }
+  }
+}
+
+void turn_x(cube* puzzle, short clockwise) {
+  rotate_face(puzzle->right, clockwise);
+  rotate_face(puzzle->left, not(clockwise));
+  for(int i = 0; i < SIZE; i++) {
+    for(int j = 0; j < SIZE; j++) {
+      short temp = puzzle->front[i][j];
+      if(clockwise) {
+	puzzle->front[i][j] = puzzle->down[i][j];
+	puzzle->down[i][j] = puzzle->back[SIZE - 1 - i][SIZE - 1 - j];
+	puzzle->back[SIZE - 1 - i][SIZE - 1 - j] = puzzle->up[i][j];
+	puzzle->up[i][j] = temp;
+      } else {
+	puzzle->front[i][j] = puzzle->up[i][j];
+	puzzle->up[i][j] = puzzle->back[SIZE - 1 - i][SIZE - 1 - j];
+	puzzle->back[SIZE - 1 - i][SIZE - 1 - j] = puzzle->down[i][j];
+	puzzle->down[i][j] = temp;
+      }
     }
   }
 }

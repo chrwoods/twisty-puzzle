@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
       turn_up(&puzzle, 1);
     } else if(ch == 'd') {
       turn_down(&puzzle, 1);
+    } else if(ch == 'x') {
+      turn_x(&puzzle, 1);
     }
     update_cube_from_map(puzzle, map_1, 2, 0, 1);
     ch = getch();
