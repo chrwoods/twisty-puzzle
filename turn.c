@@ -168,3 +168,24 @@ void turn_y(cube* puzzle, short clockwise) {
     memcpy(puzzle->right, temp, sizeof(temp));
   }
 }
+
+void turn_z(cube* puzzle, short clockwise) {
+  rotate_face(puzzle->front, clockwise);
+  rotate_face(puzzle->back, not(clockwise));
+  for(int i = 0; i < SIZE; i++) {
+    for(int j = 0; j < SIZE; j++) {
+      short temp = puzzle->up[i][j];
+      if(clockwise) {
+	puzzle->up[i][j] = puzzle->left[SIZE - 1 - j][i];
+	puzzle->left[SIZE - 1 - j][i] = puzzle->down[SIZE - 1 - i][SIZE - 1 - j];
+	puzzle->down[SIZE - 1 - i][SIZE - 1 - j] = puzzle->right[j][SIZE - 1 - i];
+	puzzle->right[j][SIZE - 1 - i] = temp;
+      } else {
+	puzzle->up[i][j] = puzzle->right[j][SIZE - 1 - i];
+	puzzle->right[j][SIZE - 1 - i] = puzzle->down[SIZE - 1 - i][SIZE - 1 - j];
+	puzzle->down[SIZE - 1 - i][SIZE - 1 - j] = puzzle->left[SIZE - 1 - j][i];
+	puzzle->left[SIZE - 1 - j][i] = temp;
+      }
+    }
+  }
+}
