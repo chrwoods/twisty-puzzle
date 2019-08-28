@@ -1,3 +1,5 @@
+#include <string.h>
+
 short not(short num) {
   return num ? 0 : 1;
 }
@@ -146,5 +148,23 @@ void turn_x(cube* puzzle, short clockwise) {
 	puzzle->down[i][j] = temp;
       }
     }
+  }
+}
+
+void turn_y(cube* puzzle, short clockwise) {
+  rotate_face(puzzle->up, clockwise);
+  rotate_face(puzzle->down, not(clockwise));
+  short temp[SIZE][SIZE];
+  memcpy(temp, puzzle->front, sizeof(temp));
+  if(clockwise) {
+    memcpy(puzzle->front, puzzle->right, sizeof(temp));
+    memcpy(puzzle->right, puzzle->back, sizeof(temp));
+    memcpy(puzzle->back, puzzle->left, sizeof(temp));
+    memcpy(puzzle->left, temp, sizeof(temp));
+  } else {
+    memcpy(puzzle->front, puzzle->left, sizeof(temp));
+    memcpy(puzzle->left, puzzle->back, sizeof(temp));
+    memcpy(puzzle->back, puzzle->right, sizeof(temp));
+    memcpy(puzzle->right, temp, sizeof(temp));
   }
 }
