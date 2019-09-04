@@ -189,3 +189,9 @@ void turn_z(cube* puzzle, short clockwise) {
     }
   }
 }
+
+void turn_middle(cube* puzzle, short clockwise) {
+  turn_x(puzzle, not(clockwise));
+  turn_right(puzzle, clockwise);
+  turn_left(puzzle, not(clockwise));
+}
