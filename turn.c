@@ -195,3 +195,15 @@ void turn_middle(cube* puzzle, short clockwise) {
   turn_right(puzzle, clockwise);
   turn_left(puzzle, not(clockwise));
 }
+
+void turn_equator(cube* puzzle, short clockwise) {
+  turn_y(puzzle, not(clockwise));
+  turn_up(puzzle, clockwise);
+  turn_down(puzzle, not(clockwise));
+}
+
+void turn_standing(cube* puzzle, short clockwise) {
+  turn_z(puzzle, clockwise);
+  turn_front(puzzle, not(clockwise));
+  turn_back(puzzle, clockwise);
+}

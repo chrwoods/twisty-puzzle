@@ -45,6 +45,10 @@ int main(int argc, char *argv[]) {
       turn_z(&puzzle, 1);
     } else if(ch == 'm') {
       turn_middle(&puzzle, 1);
+    } else if(ch == 'e') {
+      turn_equator(&puzzle, 1);
+    } else if(ch == 's') {
+      turn_standing(&puzzle, 1);
     }
     update_cube_from_map(puzzle, map_1, 2, 0, 1);
     ch = getch();
